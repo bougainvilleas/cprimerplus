@@ -1,24 +1,24 @@
 # Object files
-*.i  # gcc -E
-*.s  # gcc -S
-*.o  # gcc -c
+**/*.i  # gcc -E
+**/*.s  # gcc -S
+**/*.o  # gcc -c
 
 # Libraries
-*.lib
-*.a
-*.la
-*.lo
+**/*.lib
+**/*.a
+**/*.la
+**/*.lo
 
 # Shared objects (inc. Windows DLLs)
-*.dll
-*.so
+**/*.dll
+**/*.so
 
 # Executables
-*.exe
-*.out # gcc xx.c -o xx.out
+**/*.exe
+**/*.out # gcc xx.c -o xx.out
 
 # Debug files
-*.dSYM/
-*.su
-*.idb
-*.pdb
+**/*.dSYM/
+**/*.su
+**/*.idb
+**/*.pdb
