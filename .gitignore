@@ -1,22 +1,7 @@
-# Prerequisites
-*.d
-
 # Object files
 *.i  # gcc -E
 *.s  # gcc -S
 *.o  # gcc -c
-*.ko
-*.obj
-*.elf
-
-# Linker output
-*.ilk
-*.map
-*.exp
-
-# Precompiled Headers
-*.gch
-*.pch
 
 # Libraries
 *.lib
@@ -27,31 +12,13 @@
 # Shared objects (inc. Windows DLLs)
 *.dll
 *.so
-*.so.*
-*.dylib
 
 # Executables
 *.exe
-*.out
-*.app
-*.i*86
-*.x86_64
-*.hex
+*.out # gcc xx.c -o xx.out
 
 # Debug files
 *.dSYM/
 *.su
 *.idb
 *.pdb
-
-# Kernel Module Compile Results
-*.mod*
-*.cmd
-.tmp_versions/
-modules.order
-Module.symvers
-Mkfile.old
-dkms.conf
-
-.idea
-cmake-build-debug
