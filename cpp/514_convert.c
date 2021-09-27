@@ -16,5 +16,10 @@ int main(void)
 	printf("Now ch = %c\n",ch);
 	ch = 80.89; //ch = 80; 'P'
 	printf("Now ch = %c\n",ch);
+
+	// cast 强制类型转换
+	printf("a = 1.6 + 1.7 =%d\n",(int)(1.6 + 1.7));
+	printf("a = (int)1.6 + (int)1.7 =%d\n",(int)1.6+(int)1.7);
+
 	return 0;
 }
