@@ -10,6 +10,7 @@ int main(void)
 	char input[LIM][SIZE];
 	int ct =0;
 	printf("Enter up to %d lines (type quit to quit):\n",LIM);
+	//input[ct][0] != '\0' 检测是否输入空行 输入空行结束
 	while(ct<LIM && s_gets(input[ct],SIZE) !=NULL && input[ct][0] !='\0' && strcmp(input[ct],STOP))
 		ct++;
 	printf("%d strings entered\n",ct);
