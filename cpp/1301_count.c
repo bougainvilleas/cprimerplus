@@ -1,6 +1,9 @@
 /* count.c -- 使用标准IO 统计文件中的字符数*/
 #include <stdio.h>
-#include <stdlib.h> //提供exit() 原型
+//提供exit() 原型 关闭所有打开的文件并结束程序
+//0或EXIT_SUCCESS 表明成功结束程序
+//EXIT_FAILURE 表明结束程序失败
+#include <stdlib.h>
 
 int main(int argc,char *argv[])
 {
