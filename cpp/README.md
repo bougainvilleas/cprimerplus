@@ -344,3 +344,94 @@ ptrst->code = 3451;
 item.code=3451;
 (*ptrst).code=3451;
 ```
+
+## typedef
+
+> 高级数据特性，利用typedef可以为某一类型自定义名称，这方面与#define类似，但是有三处不同
+> > typedef 创建的符号名只受限于类型，不能用于值 \
+> > typedef 由编译器解释，不是预处理器 \
+> > 在受限范围内，typedef 比 #define 更灵活
+>
+> 该定义的作用域取决于typedef定义所在的位置
+> > 如果定义在函数中，具有局部作用域，受限于定义所在的函数 \
+> > 如果定义在函数外面，就具有文件作用域
+>
+> 通常typedef定义中用大写字母表示被定义的名称，以提醒用户这个类型名实际上是一个符号缩写，可以用小写 \
+> 为现有类型创建一个名称，typedef 提高程序可移植性 \
+> sizeof运算符返回类型 size_t类型，time()函数返回类型 time_t类型 \
+> C标准规定sizeof和time()返回整数类型，但是让实现来决定具体是什么整数类型 \
+> 原因是，C标准委员会认为没有哪个类型对于所有的计算机平台都是最优选择 \
+> 所以标准委员会建立一个新的类型名 size_t和time_t并让实现使用typedef来设置它具体的类型
+>
+> C标准提供以下通用原型
+> > time_t time(time_t *); \
+> > time_t 在一个系统中是unsigned long 在另一个系统中可以是 unsigned long long 只要包含 time.h头文件，程序就能访问合适的定义
+> 
+> typedef 和#define功能重合
+> > #define BYTE unsigned char \
+> > 使用预处理器用 BYTE代替 unsigned char
+>
+> typedef 特有功能
+> > `typedef char * STRING;` \
+> > 没有typedef 编译器将STRING识别为一个指向char的指针变量 \
+> > 有了typedef 编译器把STRING解释成一个类型的标识符，该类型是指向char的指针 \
+> > `STRING name,sign;` 相当于 `char *name,*sign;` \
+> > 如果`#define STRING char *` \
+> > `STRING name,sign;` 相当于 `char *name,sign` 只有name才是指针 \
+> > typedef 用于结构 `typedef struct complex{float real;float imag;} COMPLEX;` \
+> > 用COMPLEX类型代替complex结构来表示复数
+>
+> 使用typedef原因
+> > 1. 为经常出现的类型创建一个方便、易识别的类型名 \
+> > 2. 给复杂类型命名
+> > > typedef char(*FRPTC()) [5]; 把FRPTC声明为一个函数类型，该函数返回一个指针，该指针指向内含5个char类型元素的数组
+> 
+> typedef 并没有创建任何新类型，它只是为某个已存在的类型增加了一个方便使用的标签 \
+> 通过struct union typedef C提供了有效处理数据的工具和处理可移植数据的工具
+
+### 复杂声明
+
+|符号|含义|
+|:---|:---|
+|*|表示一个指针|
+|()|表示一个函数|
+|[]|表示一个数组|
+
+```
+int board[8][8]; //声明一个内含int数组的数组
+int **ptr; //声明一个指向int的指针的指针
+int *risks[10]; //声明一个内含10个元素的数组，元素是指向int的指针，指针数组
+int (*rusks)[10]; //声明一个指向数组的指针，被指向的数组内含10个int类型的值，数组指针
+int *oof[3][4]; //声明一个3X4的二维数组，每个元素都是指向int的指针，二维指针数组
+int (*uuf)[3][4]; //声明一个指向3X4二维数组的指针，被指向的二维数组内含有int类型值
+int (*uof[3])[4]; //声明一个内含3个指针元素的数组(指针数组)，其中每个指针都指向一个内含4个int类型元素的数组
+
+char *fump(int);//返回字符指针的函数
+char (*frump)(int);//指向函数的指针，该函数的返回类型为char
+char (*flump[3])(int);//内含3个指针的数组，每个指针都指向返回类型为char的函数
+
+//使用typedef建立一系列相关类型
+typedef int arr5[5];
+typedef arr5 * p_arr5;
+typedef p_arr5 arrp10[10];
+arr5 togs;//int togs[5];
+p_arr5 p2;//int *p2=togs;
+arrp10 ap;//int *ap[10][5];
+```
+
+> 1. 数组名后面的[]和函数名后面的()具有相同的优先级 比*优先级高。所以int * risks[10];是一个存放指针的数组，不是指向数组的指针 \
+> 2. [] () 优先级相同，从左往右结合。int (*rusks)[10];*先与rusks结合，rusks是一个指针，指向一个内含10个int类型元素的数组 \
+> 3. int goods[12][50]; 内含12个元素的数组，每个元素是含有50个，int元素的数组 \
+> 4. int *oof[3][4]; 内含3个元素的数组，每个元素是含有4个元素的数组，* 说明这4个元素是指针，int表明这4个元素是指向int的指针 \
+> > oof是一个内含3个元素的数组，每个元素是有4个指向int的指针组成的数组 \
+> > oof是一个3x4的二维数组，每个元素都是指向int的指针，编译器要为12个指针预留内存空间
+> 5. int(*uuf)[3][4];圆括号是的*先与uuf集合，说明uuf是个指针，所以uuf是一个指向3x4的int类型二维数组的指针，编译器为一个指针预留内存空间
+
+### example
+
+```
+//定义 用BYTE 表示1byte的数组
+typedef unsigned char BYTE;
+//使用BYTE定义变量
+BYTE x,y[10],*z;
+```
